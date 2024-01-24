@@ -6,51 +6,54 @@ using System.Threading.Tasks;
 
 namespace ClassesInheritanceAndPolymorphism
 {
-    // Class Definition
-    // 'public class Vehicle : Engine': Defines a new class named 'Vehicle' which inherits from the 'Engine' class.
-    // Inheritance is denoted by the colon symbol (:) followed by the base class name 'Engine'.
-    // This means 'Vehicle' includes all properties and methods of 'Engine', along with its own defined features.
-    public class Vehicle : Engine
-    {
-        // Properties
 
-        // 'public string Make { get; set; }': Defines a property named 'Make' of type 'string'.
-        // This property is used to store the make of the vehicle and is accessible externally.
-        // The '{ get; set; }' syntax provides automatic getters and setters.
+    /// <summary>
+    /// Represents a vehicle with a manufacturer, model, and an associated engine.
+    /// </summary>
+    public class Vehicle : Engine, IMechanical
+    {
+        /// <summary>
+        /// Gets or sets the manufacturer of the vehicle.
+        /// </summary>
         public string Manufacturer { get; set; }
 
-        // 'public string Model { get; set; }': Similarly, this line defines a property named 'Model'
-        // of type 'string'. It is used to store the model of the vehicle and also has getters and setters.
+        /// <summary>
+        /// Gets or sets the model of the vehicle.
+        /// </summary>
         public string Model { get; set; }
 
-        // Constructor
-
-        // 'public Vehicle(string make, string model, string type, int horsepower)': Constructor for the 'Vehicle' class.
-        // It takes four parameters - 'make' and 'model' specific to 'Vehicle', and 'type' and 'horsepower'
-        // which are passed to the base 'Engine' class constructor.
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Vehicle"/> class with the specified make, model, engine type, and horsepower.
+        /// </summary>
+        /// <param name="make">The manufacturer of the vehicle.</param>
+        /// <param name="model">The model of the vehicle.</param>
+        /// <param name="type">The type of the engine.</param>
+        /// <param name="horsepower">The horsepower of the engine.</param>
         public Vehicle(string make, string model, string type, int horsepower)
-            : base(type, horsepower) // Calls the constructor of the base class 'Engine' with 'type' and 'horsepower'.
+            : base(type, horsepower)
         {
-            // Set the 'Make' and 'Model' properties with the values provided.
             Manufacturer = make;
             Model = model;
 
-            // 'Console.WriteLine("Constructing Vehicle")': Prints "Constructing Vehicle" to the console
-            // whenever a 'Vehicle' object is constructed.
             Console.WriteLine("Constructing Vehicle");
         }
 
-        // Method
-
-        // 'public void PrintVehicleDetails()': Method to print the details of the vehicle.
-        // This method is specific to the 'Vehicle' class and complements the functionality inherited from 'Engine'.
+        /// <summary>
+        /// Prints the make and model of the vehicle along with engine details.
+        /// </summary>
         public void PrintVehicleDetails()
         {
-            // Print the make and model of the vehicle using interpolated string syntax.
             Console.WriteLine($"Make: {Manufacturer}, Model: {Model}");
-            // Call the 'PrintDetails' method from the base 'Engine' class to print engine details.
-            // This demonstrates the use of inheritance, where a method from the base class is utilized.
+
             PrintDetails();
+        }
+
+        /// <summary>
+        /// Displays information about the vehicle, including make, model, and engine type.
+        /// </summary>
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Make: {Manufacturer}, Model: {Model}, Engine Type: {Type}");
         }
     }
 }
