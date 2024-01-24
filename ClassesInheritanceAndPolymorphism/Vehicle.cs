@@ -43,7 +43,7 @@ namespace ClassesInheritanceAndPolymorphism
         /// </summary>
         public void PrintVehicleDetails()
         {
-            Console.WriteLine($"Make: {Manufacturer}, Model: {Model}");
+            Console.WriteLine($"Manufacturer: {Manufacturer}, Model: {Model}");
 
             PrintDetails();
         }
@@ -53,7 +53,7 @@ namespace ClassesInheritanceAndPolymorphism
         /// </summary>
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Make: {Manufacturer}, Model: {Model}, Engine Type: {Type}");
+            Console.WriteLine($"Manufacturer: {Manufacturer}, Model: {Model}, Engine Type: {Type}");
         }
     }
 }
