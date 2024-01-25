@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace OOP_Examples
 {
+
+
+
+    public class ExampleClass
+    {
+        public static int StaticVariable = 20; // Static variable
+
+        public void MyMethod()
+        {
+            Console.WriteLine(ExampleClass.StaticVariable); // Accessible via class name
+        }
+    }
+
     public class BankAccount
     {
         private double balance; // Private variable, hidden from outside

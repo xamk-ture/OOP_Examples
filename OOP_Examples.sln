@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_Examples", "OOP_Examples\OOP_Examples.csproj", "{E9C1F557-9348-46C6-BCBF-9D0EEFBFC6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP_Examples", "OOP_Examples\OOP_Examples.csproj", "{E9C1F557-9348-46C6-BCBF-9D0EEFBFC6DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassesInheritanceAndPolymorphism", "ClassesInheritanceAndPolymorphism\ClassesInheritanceAndPolymorphism.csproj", "{0C82DEE0-3127-4223-9A86-A4EFC50A0583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassesInheritanceAndPolymorphism", "ClassesInheritanceAndPolymorphism\ClassesInheritanceAndPolymorphism.csproj", "{0C82DEE0-3127-4223-9A86-A4EFC50A0583}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarioExample", "MarioExample\MarioExample.csproj", "{1A1724BD-F66F-4597-8FD0-5EF0272AAFC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0C82DEE0-3127-4223-9A86-A4EFC50A0583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C82DEE0-3127-4223-9A86-A4EFC50A0583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C82DEE0-3127-4223-9A86-A4EFC50A0583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1724BD-F66F-4597-8FD0-5EF0272AAFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1724BD-F66F-4597-8FD0-5EF0272AAFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1724BD-F66F-4597-8FD0-5EF0272AAFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1724BD-F66F-4597-8FD0-5EF0272AAFC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
