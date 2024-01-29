@@ -2,11 +2,16 @@
 {
     internal class Program
     {
+        /// <summary>
+        /// Delegate that takes an int and returns an int
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public delegate int Operation(int x);
-
 
         static void Main(string[] args)
         {
+            //Create new delegate instances and assign them to methods
             Operation op1 = Double;
             Operation op2 = Triple;
 
