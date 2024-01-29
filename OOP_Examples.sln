@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarioExample", "MarioExampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqExamples", "LinqExamples\LinqExamples.csproj", "{3D68B8B9-FFEA-436B-B876-40CD9994F1ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateExamples", "DelegateExamples\DelegateExamples.csproj", "{8A6992AA-CC86-4B08-B2A0-1208CC0D276E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3D68B8B9-FFEA-436B-B876-40CD9994F1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D68B8B9-FFEA-436B-B876-40CD9994F1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D68B8B9-FFEA-436B-B876-40CD9994F1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6992AA-CC86-4B08-B2A0-1208CC0D276E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6992AA-CC86-4B08-B2A0-1208CC0D276E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6992AA-CC86-4B08-B2A0-1208CC0D276E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6992AA-CC86-4B08-B2A0-1208CC0D276E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
