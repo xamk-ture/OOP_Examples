@@ -117,5 +117,94 @@ namespace LinqExamples
         }
 
         #endregion
+
+
+        #region SelectAndGroupByLinqExamples
+
+        /// <summary>
+        /// This method demonstrates the use of the Select method
+        /// </summary>
+        private static void SelectExample1()
+        {
+            Console.WriteLine("SelectExample1");
+
+            var movies = Movie.GetMovies();
+
+            //Selects the title of each movie (only the string Title property)
+            var movieTitles = movies.Select(movie => movie.Title);
+
+            foreach (var title in movieTitles)
+            {
+                Console.WriteLine(title);
+            }
+
+        }
+
+        /// <summary>
+        /// This method demonstrates the use of the Select method with an anonymous type
+        /// </summary>
+        private static void SelectExample2()
+        {
+            Console.WriteLine("SelectExample2");
+
+            var movies = Movie.GetMovies();
+
+            //Selects the title and year of each movie and creates a new anonymous type object
+            var anonymousType = movies.Select(movie => new { movie.Title, movie.Year });
+
+            foreach (var movie in anonymousType)
+            {
+                Console.WriteLine(movie.Title + " " + movie.Year);
+            }
+        }
+
+        /// <summary>
+        /// This method demonstrates the use of GroupBy method
+        /// </summary>
+        private static void GroupByExample()
+        {
+            Console.WriteLine("GroupByExample");
+
+            var movies = Movie.GetMovies();
+
+            //Groups the movies by the director
+            var moviesByDirector = movies.GroupBy(movie => movie.Director);
+
+            foreach (var group in moviesByDirector)
+            {
+                //The key is the director
+                Console.WriteLine(group.Key);
+
+                //The group is the list of movies by that director
+                foreach (var movie in group)
+                {
+                    Console.WriteLine(movie.Title);
+                }
+            }
+        }
+
+        private static void GroupByWithSelect()
+        {
+            Console.WriteLine("GroupByWithSelect");
+
+            var movies = Movie.GetMovies();
+
+            //Groups the movies by the director and selects the title of each movie
+            var moviesByDirector = movies.GroupBy(movie => movie.Director, movie => movie.Title);
+
+            foreach (var group in moviesByDirector)
+            {
+                //The key is the director
+                Console.WriteLine(group.Key);
+
+                //The group is the list of movie titles by that director
+                foreach (var title in group)
+                {
+                    Console.WriteLine(title);
+                }
+            }
+        }
+
+        #endregion
     }
 }
