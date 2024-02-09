@@ -40,9 +40,8 @@ namespace ScopeExamples
 
             //This will not work because privateString is not in scope and cannot be accessed
             //Console.WriteLine(globalScope.privateString);
+
         }
-
-
 
     }
 }
