@@ -19,10 +19,13 @@ namespace ScopeExamples
             for (int number = 0; number < 10; number++)
             {
                 Console.WriteLine(number);
+
             }
+
 
             //This will not work because number is not in scope and cannot be accessed
             //Console.WriteLine(number);
+
         }
 
         public void ScopeTests()
@@ -41,6 +44,7 @@ namespace ScopeExamples
             //This will not work because privateString is not in scope and cannot be accessed
             //Console.WriteLine(globalScope.privateString);
 
+            InternalClass internalClass = new();
         }
 
     }

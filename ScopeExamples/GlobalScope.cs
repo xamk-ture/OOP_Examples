@@ -34,10 +34,36 @@ namespace ScopeExamples
         /// Protected members can be accessed by derived classes or the class itself
         /// </summary>
         protected string ProtectedString = "I am a protected string";
+
+        public InternalClass(string name)
+        {
+          
+        }
+
+        public InternalClass()
+        {
+            
+        }
+
+        public InternalClass(string name, string name2)
+        {
+            
+        }
     }
 
     internal class DeriviedClass : InternalClass
     { 
+
+        public DeriviedClass(string name, string name2) : base()
+        {
+            
+        }
+
+        public DeriviedClass() 
+        {
+            
+        }   
+
         public void Test()
         {
             //This will work because InternalString is in scope and can be accessed
@@ -54,6 +80,8 @@ namespace ScopeExamples
 
             InternalClass internalClass = new();
             Console.WriteLine(internalClass.InternalString);
+
+            DeriviedClass deriviedClass = new();
         }
     }
 }

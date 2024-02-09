@@ -24,4 +24,14 @@ namespace PropertiesExamples
             }
         }
     }
+
+    public class Test
+    {
+        public void TestEmployee()
+        {
+            Employee employee = new Employee();
+            employee.Age = 25; // Setteri sets age field value
+            Console.WriteLine(employee.Age); // Getteri returns age field value
+        }
+    }
 }

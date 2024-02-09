@@ -11,9 +11,13 @@ namespace PropertiesExamples
         /// <summary>
         /// Property for the user's name
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get => name; 
+            set => name = value; }
 
         private string privateName;
+        private string name;
+
+        public string Name3;
 
         /// <summary>
         /// Example of a property with a private backing field. 
@@ -27,6 +31,7 @@ namespace PropertiesExamples
             }
             set
             { 
+
                 privateName = value; 
             }
         }

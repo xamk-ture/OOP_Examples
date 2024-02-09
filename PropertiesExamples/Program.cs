@@ -21,6 +21,9 @@
 
             //Using methods to set and get the user's name
             Console.WriteLine(user.GetName());
+
+            user.Name3 = "David";
+            Console.WriteLine(user.Name3);
         }
     }
 }
