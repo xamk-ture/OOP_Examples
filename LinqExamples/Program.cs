@@ -73,8 +73,16 @@ namespace LinqExamples
         {
             IEnumerable<string> strings = new List<string> { "Apple", "Banana", "Avocado", null, "Apricot" };
 
-            // LINQ-kysely, jossa käytetään IsNotNullAndStartsWithA-funktiota
-            var filteredStrings = strings?.Where(IsNotNullAndStartsWithA).ToList() ?? new List<string>();
+            // LINQ example that uses hand written method
+            var filteredStrings = strings.Where(IsNotNullAndStartsWithA).ToList();
+
+            var anotherWay = strings.Where(s => s != null && s.StartsWith("A"))
+                .ToList();
+
+            //with delegate
+            Func<string, bool> func = IsNotNullAndStartsWithA;
+
+            var delegateWay = strings.Where(func).ToList();
 
             //What the code does behind the scenes
             BehindTheScenesString(strings);
@@ -169,6 +177,27 @@ namespace LinqExamples
         }
 
         /// <summary>
+        /// Example of what linq query does behind the scenes
+        /// </summary>
+        private static void SelectExample2BehindTheScenes()
+        { 
+            var movies = Movie.GetMovies();
+
+            //List<AnonymousType> anonymousType = new();
+
+            //foreach (var movie in movies)
+            //{
+            //    anonymousType.Add(new AnonymousType { Title = movie.Title, Year = movie.Year });
+            //}
+
+            //foreach (var movie in anonymousType)
+            //{
+            //    Console.WriteLine(movie.Title + " " + movie.Year);
+            //}
+
+        }
+
+        /// <summary>
         /// This method demonstrates the use of GroupBy method
         /// </summary>
         private static void GroupByExample()
@@ -193,6 +222,39 @@ namespace LinqExamples
             }
         }
 
+        /// <summary>
+        /// Example of what linq query does behind the scenes
+        /// </summary>
+        private static void GroupByExampleBehindTheScenes()
+        {
+            var movies = Movie.GetMovies();
+
+            Dictionary<string, List<Movie>> moviesByDirector = new();
+
+            foreach (var movie in movies)
+            {
+                if (moviesByDirector.ContainsKey(movie.Director))
+                {
+                    moviesByDirector[movie.Director].Add(movie);
+                }
+                else
+                {
+                    moviesByDirector.Add(movie.Director, new List<Movie> { movie });
+                }
+            }
+
+            foreach (var group in moviesByDirector)
+            {
+                Console.WriteLine(group.Key);
+
+                foreach (var movie in group.Value)
+                {
+                    Console.WriteLine(movie.Title);
+                }
+            }
+
+        }
+
         private static void GroupByWithSelect()
         {
             Console.WriteLine("GroupByWithSelect");
@@ -213,6 +275,36 @@ namespace LinqExamples
                     Console.WriteLine(title);
                 }
             }
+        }
+
+        private static void GroupByWithSelectBehindTheScenes()
+        {
+            var movies = Movie.GetMovies();
+
+            Dictionary<string, List<string>> moviesByDirector = new();
+
+            foreach (var movie in movies)
+            {
+                if (moviesByDirector.ContainsKey(movie.Director))
+                {
+                    moviesByDirector[movie.Director].Add(movie.Title);
+                }
+                else
+                {
+                    moviesByDirector.Add(movie.Director, new List<string> { movie.Title });
+                }
+            }
+
+            foreach (var group in moviesByDirector)
+            {
+                Console.WriteLine(group.Key);
+
+                foreach (var title in group.Value)
+                {
+                    Console.WriteLine(title);
+                }
+            }
+
         }
 
         #endregion
