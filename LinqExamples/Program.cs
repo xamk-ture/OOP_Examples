@@ -24,6 +24,16 @@ namespace LinqExamples
             //With hand written method
             var anotherWayWithMethod = numbers.Where(IsNumberEven).ToArray();
 
+            //Example with delegate
+            Func<int, bool> func = IsNumberEven;
+
+            //Example with lambda
+            Func<int, bool> func2 = x => x % 2 == 0;
+
+            var evenWithDelegate = numbers.Where(func).ToArray();
+
+            var evenWithLambda = numbers.Where(func2).ToArray();
+
             return evenNumbers;
         }
 
