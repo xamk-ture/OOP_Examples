@@ -18,17 +18,18 @@ namespace LinqExamples
 
             var evenNumbers = numbers.Where(x => x % 2 == 0).ToArray();
 
-            //What the code does behind the scenes
-            BehindTheScenesNumbers(numbers);
-
             //With hand written method
             var anotherWayWithMethod = numbers.Where(IsNumberEven).ToArray();
+
+            //What the code does behind the scenes
+            BehindTheScenesNumbers(numbers);
 
             //Example with delegate
             Func<int, bool> func = IsNumberEven;
 
             //Example with lambda
             Func<int, bool> func2 = x => x % 2 == 0;
+
 
             var evenWithDelegate = numbers.Where(func).ToArray();
 
