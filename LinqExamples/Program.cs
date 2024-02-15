@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace LinqExamples
+﻿namespace LinqExamples
 {
     internal class Program
     {
@@ -8,6 +6,9 @@ namespace LinqExamples
         {
             FindEvenNumbers();
             GetItemsThatStartWithLetterA();
+
+            GroupByExample();
+            GroupByWithSelect();
         }
 
         #region LinqExamples
@@ -16,7 +17,8 @@ namespace LinqExamples
         {
             int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var evenNumbers = numbers.Where(x => x % 2 == 0).ToArray();
+            //With lambda
+            var evenNumbers = numbers.Where(number => number % 2 == 0).ToArray();
 
             //With hand written method
             var anotherWayWithMethod = numbers.Where(IsNumberEven).ToArray();
@@ -30,6 +32,7 @@ namespace LinqExamples
             //Example with lambda
             Func<int, bool> func2 = x => x % 2 == 0;
 
+            string test = "test";
 
             var evenWithDelegate = numbers.Where(func).ToArray();
 
@@ -38,6 +41,7 @@ namespace LinqExamples
             return evenNumbers;
         }
 
+
         /// <summary>
         /// What linq query does behind the scenes
         /// </summary>
@@ -45,6 +49,9 @@ namespace LinqExamples
         /// <returns></returns>
         private static int[] BehindTheScenesNumbers(int[] numbers)
         {
+            //what this does actually
+            var evenNumberso = numbers.Where(number => number % 2 == 0).ToArray();
+
             List<int> evenNumbers = new();
 
             foreach (var number in numbers)
@@ -74,11 +81,11 @@ namespace LinqExamples
         {
             IEnumerable<string> strings = new List<string> { "Apple", "Banana", "Avocado", null, "Apricot" };
 
+            var anotherWay = strings.Where(s => s != null && s.StartsWith("A"))
+             .ToList();
+
             // LINQ example that uses hand written method
             var filteredStrings = strings.Where(IsNotNullAndStartsWithA).ToList();
-
-            var anotherWay = strings.Where(s => s != null && s.StartsWith("A"))
-                .ToList();
 
             //with delegate
             Func<string, bool> func = IsNotNullAndStartsWithA;
@@ -104,7 +111,11 @@ namespace LinqExamples
         /// <param name="strings"></param>
         private static List<string> BehindTheScenesString(IEnumerable<string> strings)
         {
-            List<string> filteredStrings2 = new();
+            //What this does actually
+            //   var anotherWay = strings.Where(s => s != null && s.StartsWith("A"))
+            // .ToList();
+
+            List<string> result = new();
 
             if (strings != null)
             {
@@ -112,16 +123,16 @@ namespace LinqExamples
                 {
                     if (IsNotNullAndStartsWithA(s))
                     {
-                        filteredStrings2.Add(s);
+                        result.Add(s);
                     }
                 }
             }
             else
             {
-                filteredStrings2 = new List<string>();
+                result = new List<string>();
             }
 
-            return filteredStrings2;
+            return result;
         }
 
 
@@ -132,7 +143,7 @@ namespace LinqExamples
         /// <returns></returns>
         private static bool IsNotNullAndStartsWithA(string s)
         {
-            return s != null && s.StartsWith("A", StringComparison.OrdinalIgnoreCase);
+            return s != null && s.StartsWith("A");
         }
 
         #endregion
@@ -147,16 +158,36 @@ namespace LinqExamples
         {
             Console.WriteLine("SelectExample1");
 
-            var movies = Movie.GetMovies();
+            List<Movie> movies = Movie.GetMovies();
 
             //Selects the title of each movie (only the string Title property)
-            var movieTitles = movies.Select(movie => movie.Title);
+            List<string> movieTitles = movies.Select(movie => movie.Title).ToList();
+
+            var test = movies.Select(SelectLambdaMethodBehindTheScenes);
 
             foreach (var title in movieTitles)
             {
                 Console.WriteLine(title);
             }
 
+        }
+
+        private static List<string> BehindTheScenesSelect(List<Movie> movies) 
+        {
+            List<string> results = new List<string>();
+
+            foreach (var movie in movies)
+            {
+                results.Add(movie.Title);
+            }
+
+            return results;
+
+        }
+
+        private static string SelectLambdaMethodBehindTheScenes(Movie movie)
+        {
+            return movie.Title;
         }
 
         /// <summary>
@@ -181,23 +212,27 @@ namespace LinqExamples
         /// Example of what linq query does behind the scenes
         /// </summary>
         private static void SelectExample2BehindTheScenes()
-        { 
+        {
             var movies = Movie.GetMovies();
 
             //We can't run this code because we don't have the AnonymousType class
-            //List<AnonymousType> anonymousType = new();
+            List<AnonymousType> anonymousType = new();
 
-            //foreach (var movie in movies)
-            //{
-            //    anonymousType.Add(new AnonymousType { Title = movie.Title, Year = movie.Year });
-            //}
+            foreach (var movie in movies)
+            {
+                anonymousType.Add(new AnonymousType { Title = movie.Title, Year = movie.Year });
+            }
 
-            //foreach (var movie in anonymousType)
-            //{
-            //    Console.WriteLine(movie.Title + " " + movie.Year);
-            //}
+            foreach (var movie in anonymousType)
+            {
+                Console.WriteLine(movie.Title + " " + movie.Year);
+            }
 
         }
+
+        
+
+
 
         /// <summary>
         /// This method demonstrates the use of GroupBy method
