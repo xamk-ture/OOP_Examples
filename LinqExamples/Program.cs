@@ -184,6 +184,7 @@ namespace LinqExamples
         { 
             var movies = Movie.GetMovies();
 
+            //We can't run this code because we don't have the AnonymousType class
             //List<AnonymousType> anonymousType = new();
 
             //foreach (var movie in movies)
@@ -208,12 +209,13 @@ namespace LinqExamples
             var movies = Movie.GetMovies();
 
             //Groups the movies by the director
-            var moviesByDirector = movies.GroupBy(movie => movie.Director);
+            IEnumerable<IGrouping<string, Movie>> moviesByDirector = movies.GroupBy(movie => movie.Director);
 
             foreach (var group in moviesByDirector)
             {
                 //The key is the director
                 Console.WriteLine(group.Key);
+
 
                 //The group is the list of movies by that director
                 foreach (var movie in group)
