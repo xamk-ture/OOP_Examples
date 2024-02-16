@@ -31,13 +31,29 @@
             Func<int, bool> func = IsNumberEven;
 
             //Example with lambda
-            Func<int, bool> func2 = x => x % 2 == 0;
+            Func<int, bool> func2 = x => x > 5;
+
+            var result = OwnWhereMethod(numbers, func);
 
             var evenWithDelegate = numbers.Where(func).ToArray();
 
             var evenWithLambda = numbers.Where(func2).ToArray();
 
             return evenNumbers;
+        }
+
+        public static List<int> OwnWhereMethod(int[] numbers, Func<int, bool> func)
+        {
+            List<int> result = new List<int>();
+            foreach (int number in numbers) 
+            { 
+                if (func(number))
+                {
+                    result.Add(number); 
+                } 
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -50,15 +66,15 @@
             //what this does actually
             var evenNumberso = numbers.Where(number => number % 2 == 0).ToArray();
 
-            List<int> evenNumbers = new();
+            List<int> result = new();
 
             foreach (var number in numbers)
             {
                 if (number % 2 == 0)
-                    evenNumbers.Add(number);
+                    result.Add(number);
             }
 
-            return evenNumbers.ToArray();
+            return result.ToArray();
         }
 
         /// <summary>
@@ -115,19 +131,15 @@
 
             List<string> result = new();
 
-            if (strings != null)
+            if(strings == null)
+                return result;
+
+            foreach (var s in strings)
             {
-                foreach (var s in strings)
+                if (s != null && IsNotNullAndStartsWithA(s))
                 {
-                    if (IsNotNullAndStartsWithA(s))
-                    {
-                        result.Add(s);
-                    }
+                    result.Add(s);
                 }
-            }
-            else
-            {
-                result = new List<string>();
             }
 
             return result;
@@ -158,8 +170,17 @@
 
             List<Movie> movies = Movie.GetMovies();
 
+
             //Selects the title of each movie (only the string Title property)
             List<string> movieTitles = movies.Select(movie => movie.Title).ToList();
+
+
+            //above code does this behind the scenes
+            List<string> titles = new();
+            foreach (var movie in movies)
+            {
+                titles.Add(movie.Title);
+            }
 
             var test = movies.Select(SelectLambdaMethodBehindTheScenes);
 
@@ -239,7 +260,7 @@
         {
             Console.WriteLine("GroupByExample");
 
-            var movies = Movie.GetMovies();
+            List<Movie> movies = Movie.GetMovies();
 
             //Groups the movies by the director
             IEnumerable<IGrouping<string, Movie>> moviesByDirector = movies.GroupBy(movie => movie.Director);
@@ -263,7 +284,7 @@
         /// </summary>
         private static void GroupByExampleBehindTheScenes()
         {
-            var movies = Movie.GetMovies();
+            List<Movie> movies = Movie.GetMovies();
 
             Dictionary<string, List<Movie>> moviesByDirector = new();
 
