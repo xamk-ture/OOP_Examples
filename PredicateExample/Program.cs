@@ -17,7 +17,5 @@
                 Console.WriteLine(num);
             }
         }
-
-
     }
 }

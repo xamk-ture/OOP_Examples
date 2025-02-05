@@ -4,7 +4,6 @@
     {
         static void Main(string[] args)
         {
-
             FindEvenNumbers();
             GetItemsThatStartWithLetterA();
 
@@ -26,6 +25,8 @@
 
             //What the code does behind the scenes
             BehindTheScenesNumbers(numbers);
+
+            string test = "tesr";
 
             //Example with delegate
             Func<int, bool> func = IsNumberEven;
@@ -161,6 +162,17 @@
 
         #region SelectAndGroupByLinqExamples
 
+
+        public class User
+        {
+            public string Name { get; set; }
+
+            public string Email { get; set; }
+
+            public string Phone { get; set; }
+        }
+
+
         /// <summary>
         /// This method demonstrates the use of the Select method
         /// </summary>
@@ -170,10 +182,12 @@
 
             List<Movie> movies = Movie.GetMovies();
 
+            List<User> users = new List<User>();
 
             //Selects the title of each movie (only the string Title property)
             List<string> movieTitles = movies.Select(movie => movie.Title).ToList();
 
+            List<string> movieDescriptions = movies.Select(x => x.Description).ToList();
 
             //above code does this behind the scenes
             List<string> titles = new();
@@ -217,6 +231,8 @@
             Console.WriteLine("SelectExample2");
 
             var movies = Movie.GetMovies();
+
+            List<User> users = new List<User>();
 
             //Selects the title and year of each movie and creates a new anonymous type object
             var anonymousType = movies.Select(movie => new { movie.Title, movie.Year });
@@ -269,7 +285,6 @@
             {
                 //The key is the director
                 Console.WriteLine(group.Key);
-
 
                 //The group is the list of movies by that director
                 foreach (var movie in group)
@@ -361,9 +376,31 @@
                     Console.WriteLine(title);
                 }
             }
-
         }
 
         #endregion
+
+        private static void SingleDemo()
+        {
+            var movies = Movie.GetMovies();
+
+            movies.Add(new Movie() { Title = "Batman" });
+
+            //This will crash if there is not Movie called Batman
+            //because it assumes always to find one movie called batman
+            Movie movieFound = movies.Single(x => x.Title == "Batman");
+
+            //This will return null if nothing is found and wont crash
+            //but will crashif more than one movie is found
+            Movie? movieMaybeFound = movies.SingleOrDefault(x => x.Title == "Batman");
+
+            //This will return first element it finds but will crash if nothing is found
+            //it assumes at least one should be found
+            Movie firstMovie = movies.First(x => x.Title == "Batman");
+
+            //This will return null if nothing is found
+            Movie? firstMovieDefault = movies.FirstOrDefault(x => x.Title == "Batman");
+
+        }
     }
 }
