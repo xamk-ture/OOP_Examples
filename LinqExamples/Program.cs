@@ -413,5 +413,26 @@
             //This will return null if nothing is found
             Movie? firstMovieDefault = movies.FirstOrDefault(x => x.Title == "Batman");
         }
+
+
+        public static void ToDictionaryDemo()
+        {
+            List<DictionaryUser> users = new List<DictionaryUser>();
+            users.Add(new DictionaryUser(1, "Test", "email", "Address"));
+            users.Add(new DictionaryUser(2, "Another ", "email FF", "Address FF"));
+            users.Add(new DictionaryUser(3, "Thrid", "email SS", "Address SS"));
+
+        
+            //How to select from collection key and value and convert the result to dictionary
+            Dictionary<int, string> toDictionaryExamples = users.ToDictionary(user => user.Id, user => user.Name);
+
+            //ToDictionary does this under the hood
+            Dictionary<int, string> userDictionary = new();
+
+            foreach (var user in users)
+            {
+                userDictionary.Add(user.Id, user.Name);
+            }
+        }
     }
 }
