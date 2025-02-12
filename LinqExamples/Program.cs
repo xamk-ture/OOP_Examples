@@ -4,10 +4,12 @@
     {
         static void Main(string[] args)
         {
+            SingleDemo();
+            GroupByExample();
+
             FindEvenNumbers();
             GetItemsThatStartWithLetterA();
 
-            GroupByExample();
             GroupByWithSelect();
         }
 
@@ -16,6 +18,13 @@
         public static int[] FindEvenNumbers()
         {
             int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            List<string> testNames = new List<string>();
+            testNames.Add("Tuomas");
+            testNames.Add("Matti");
+
+            List<string> result1 = testNames.Where(name => name == "Tuomas").ToList();
+            List<string> result2 = testNames.Where(name => name.StartsWith("T")).ToList();
 
             //With lambda
             var evenNumbers = numbers.Where(number => number % 2 == 0).ToArray();
@@ -85,7 +94,9 @@
         /// <returns></returns>
         private static bool IsNumberEven(int number)
         {
-            return number % 2 == 0;
+            bool result = number % 2 == 0;
+
+            return result;
         }
 
         #endregion
@@ -94,10 +105,15 @@
         #region LinqExamples2
         public static List<string> GetItemsThatStartWithLetterA()
         {
+
+            string test = null;
+
+            string? nullTest = null;
+
             IEnumerable<string> strings = new List<string> { "Apple", "Banana", "Avocado", null, "Apricot" };
 
-            var anotherWay = strings.Where(s => s != null && s.StartsWith("A"))
-             .ToList();
+            var anotherWay = strings.Where(s => s != null && s.StartsWith("A")).ToList();
+            
 
             // LINQ example that uses hand written method
             var filteredStrings = strings.Where(IsNotNullAndStartsWithA).ToList();
@@ -235,7 +251,7 @@
             List<User> users = new List<User>();
 
             //Selects the title and year of each movie and creates a new anonymous type object
-            var anonymousType = movies.Select(movie => new { movie.Title, movie.Year });
+            var anonymousType = movies.Select(movie => new { movie.Title, movie.Year, movie.Description });
 
             foreach (var movie in anonymousType)
             {
@@ -264,10 +280,6 @@
             }
 
         }
-
-        
-
-
 
         /// <summary>
         /// This method demonstrates the use of GroupBy method
@@ -384,7 +396,7 @@
         {
             var movies = Movie.GetMovies();
 
-            movies.Add(new Movie() { Title = "Batman" });
+            movies.Add(new Movie() { Title = "Batmans" });
 
             //This will crash if there is not Movie called Batman
             //because it assumes always to find one movie called batman
@@ -400,7 +412,6 @@
 
             //This will return null if nothing is found
             Movie? firstMovieDefault = movies.FirstOrDefault(x => x.Title == "Batman");
-
         }
     }
 }
